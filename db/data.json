@@ -1,17 +1,1 @@
-[
-    {
-        "id": "bda06e62-2c19-492e-b4df-e14b29f23c85",
-        "desc": "Barrer la calle",
-        "completadoEn": null
-    },
-    {
-        "id": "227a3a74-6530-4c9c-bfad-09eef28e7c45",
-        "desc": "Regar el jardín",
-        "completadoEn": null
-    },
-    {
-        "id": "b1adec50-3139-487b-b5af-2d9e7dcb18ca",
-        "desc": "Cortar el pasto",
-        "completadoEn": null
-    }
-]
+[{"id":"bda06e62-2c19-492e-b4df-e14b29f23c85","desc":"Barrer la calle","completadoEn":"2021-05-23T04:22:09.860Z"},{"id":"b1adec50-3139-487b-b5af-2d9e7dcb18ca","desc":"Cortar el pasto","completadoEn":null},{"id":"05a0ac27-af41-4373-b5f9-a0b9a4c56fa0","desc":"Lalala","completadoEn":"2021-05-23T04:29:52.769Z"},{"id":"d003d37c-818e-4110-aafb-a6a00fcca4ca","desc":"yguiybjkl","completadoEn":null}]
