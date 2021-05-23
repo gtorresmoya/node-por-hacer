@@ -1,32 +1,42 @@
-const argv = require('./config/yargs').argv;
-const colors = require('colors');
-const porHacer = require('./por-hacer/por-hacer');
+require('colors');
 
-let comando = argv._[0];
+const { guardaDB, leerDB } = require('./helpers/guardarArchivo');
+const { 
+    inquirerMenu, 
+    pausaMenu,
+    leerInput
+} = require('./helpers/inquirer');
+const Tareas = require('./models/tareas');
 
-switch (comando) {
-    case 'crear':
-        let tarea = porHacer.crear(argv.descripcion);
-        console.log(tarea);
-        break;
-    case 'listar':
-        let listado = porHacer.getListado();
-        for (let tarea of listado) {
-            console.log('=========Por Hacer========='.green);
-            console.log(tarea.descripcion);
-            console.log('Estado: ', tarea.completado);
-            console.log('==========================='.green);
+const main = async() => {
+    let opt = '';
+    const tareas = new Tareas();
+
+    const tareasDB = leerDB();
+    if(tareasDB) {
+        tareas.cargarTareasFromArray(tareasDB);
+    }
+
+    do {
+        opt = await inquirerMenu();
+
+        switch (opt) {
+            case '1':
+                const desc = await leerInput('Descripcion: ');
+                tareas.crearTarea(desc);
+                break;
+            case '2':
+                console.log(tareas.listadoArr);
+                break;
+            default:
+                break;
         }
-        break;
-    case 'actualizar':
-        let actualizar = porHacer.actualizar(argv.descripcion, argv.completado);
-        console.log(actualizar);
-        break;
-    case 'borrar':
-        let borrado = porHacer.borrar(argv.descripcion);
-        console.log(borrado);
-        break;
-    default:
-        console.log('Comando no reconocido.');
-        break;
+
+        guardaDB(JSON.stringify(tareas.listadoArr));
+
+        await pausaMenu(); 
+
+    } while( opt !== '0' );
 }
+
+main();
